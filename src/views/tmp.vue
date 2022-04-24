@@ -72,7 +72,7 @@ export default {
         let tmp = parseFloat(this.input_information[i].input_percent);
         sum += tmp;
         if (tmp < 0 || tmp > 1) error_type = 2;
-        if (this.input_information[i].input_name===null) error_type = 3;
+        if (this.input_information[i].input_name === null) error_type = 3;
       }
       if (this.input_information.length === 1) error_type = 4;
       if (this.abs(sum - 1) > this.epx) error_type = 5;
