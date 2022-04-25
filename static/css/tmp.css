@@ -1,0 +1,37 @@
+.input-name {
+    width: 33vw;
+}
+
+.input-percent {
+    width: 25vw;
+}
+
+.pie {
+    width: 85vw;
+    /*height: 50vh;*/
+    margin: auto;
+    text-align: center;
+    /*border: solid red 1px;*/
+}
+
+#pieChart {
+    margin-top: 3vh;
+    /*border: solid red 1px;*/
+    text-align: center;
+    /*width: 30vw;*/
+    /*height: 40vh;*/
+}
+
+button {
+    width: auto;
+    height: 5vh;
+    background-color: rgba(13, 255, 221, 0.45);
+    border-radius: 22%;
+    border: rgba(13, 255, 221, 0.45);
+    margin-left: 1px;
+    margin-right: 1px;
+}
+
+.el-input-group__append {
+    padding: 2px;
+}
