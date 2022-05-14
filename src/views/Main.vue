@@ -5,11 +5,11 @@
         <global-aside></global-aside>
       </el-aside>
       <el-container>
-        <el-header>
+        <el-header style="height: auto">
           <global-header/>
         </el-header>
         <el-main>
-          <router-view></router-view>
+          <router-view/>
         </el-main>
       </el-container>
     </el-container>
@@ -22,13 +22,14 @@ import globalHeader from "../components/globalHeader";
 
 export default {
   /* eslint-disable */
-  name: "Home",
+  name: "Main",
   components: {
     globalAside,
     globalHeader
   }
 }
 </script>
+
 
 <style scoped>
 .main {
@@ -41,12 +42,14 @@ export default {
   text-align: center;
   line-height: 60px;
 }
-/*.el-header{*/
-/*  background-color: #B3C0D1;*/
-/*  color: #333;*/
-/*  text-align: center;*/
-/*  line-height: 60px;*/
-/*}*/
+
+.el-header {
+  background-color: #B3C0D1;
+  color: #333;
+  text-align: center;
+  line-height: 60px;
+}
+
 .el-aside {
   background-color: #D3DCE6;
   color: #333;

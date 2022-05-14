@@ -2,7 +2,6 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 // import About from '../views/About.vue'
-// import tmp from '../views/tmp.vue'
 
 Vue.use(VueRouter)
 
@@ -15,11 +14,51 @@ const routes = [
             {
                 path: '/home',
                 name: 'home',
-                component: () => import('../views/home'),
-
+                component: () => import('../views/home/index'),
             },
 
+            {
+                path: '/clearing/RulerManage',
+                name: 'clearingRulerManage',
+                component: () => import('../views/clearing/rulerManage'),
+            },
+            {
+                path: '/clearing/Process',
+                name: 'clearingProcess',
+                component: () => import('../views/clearing/process'),
+            },
 
+            {
+                path: '/business/add',
+                name: 'businessAdd',
+                component: () => import('../views/business/add'),
+            },
+            {
+                path: '/business/delete',
+                name: 'businessDelete',
+                component: () => import('../views/business/delete'),
+            },
+            {
+                path: '/business/query',
+                name: 'businessQuery',
+                component: () => import('../views/business/query'),
+            },
+            {
+                path: '/business/update',
+                name: 'businessUpdate',
+                component: () => import('../views/business/update'),
+            },
+            {
+                path: '/business/add',
+                name: 'businessAdd',
+                component: () => import('../views/business/add'),
+            },
+
+            {
+                path: '/feedback',
+                name: 'feedback',
+                component: () => import('../views/feedback/index'),
+            },
         ]
     },
 ]
