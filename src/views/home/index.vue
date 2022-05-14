@@ -1,11 +1,11 @@
 <template>
-  <div>home</div>
+  <div>home1212</div>
 </template>
 
 <script>
 export default {
   /* eslint-disable */
-  name: "Home"
+  name: "home"
 }
 </script>
 
