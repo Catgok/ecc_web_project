@@ -1,8 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-// import About from '../views/About.vue'
-
 Vue.use(VueRouter)
 
 const routes = [
@@ -17,6 +15,7 @@ const routes = [
                 component: () => import('../views/home/index'),
             },
 
+            //clearing
             {
                 path: '/clearing/RulerManage',
                 name: 'clearingRulerManage',
@@ -28,6 +27,12 @@ const routes = [
                 component: () => import('../views/clearing/process'),
             },
 
+            //business
+            {
+                path: '/business',
+                name: 'business',
+                component: () => import('../views/business/add'),
+            },
             {
                 path: '/business/add',
                 name: 'businessAdd',
@@ -48,12 +53,8 @@ const routes = [
                 name: 'businessUpdate',
                 component: () => import('../views/business/update'),
             },
-            {
-                path: '/business/add',
-                name: 'businessAdd',
-                component: () => import('../views/business/add'),
-            },
 
+            //feedback
             {
                 path: '/feedback',
                 name: 'feedback',

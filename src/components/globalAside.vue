@@ -1,5 +1,5 @@
 <template>
-  <div class="global-aside">
+  <div class="global-aside" v-on="start">
     <el-menu class="el-menu-vertical-demo" background-color="#545c64" text-color="#fff"
              active-text-color="#ffd04b" @open="handleOpen" @close="handleClose" :collapse="isCollapse">
       <h3>{{ isCollapse ? 'ECC' : 'ECC平台' }}</h3>
@@ -10,12 +10,15 @@
         <span slot="title">{{ item.label }}</span>
       </el-menu-item>
 
-      <el-submenu style="padding: 0" v-for="item in hasChildren" :index="item.path" :key="item.path">
+      <el-submenu style="padding: 0" v-for="item in hasChildren" :index="item.path" :key="item.path"
+                  @click="clickMenu(item)">
         <template slot="title">
           <i :class="'el-icon-' + item.icon"></i>
           <span slot="title">{{ item.label }}</span>
         </template>
-        <el-menu-item-group v-for="subItem in item.children" :index="subItem.path" :key="subItem.path">
+
+        <el-menu-item-group style="padding: 0" v-for="subItem in item.children" :index="subItem.path"
+                            :key="subItem.path">
           <el-menu-item style="padding: 0; min-width: 180px" :index=subItem.path @click="clickMenu(subItem)">
             {{ subItem.label }}
           </el-menu-item>
@@ -75,15 +78,17 @@ export default {
           url: '/home',
         },
         {
+          path: '/business',
+          name: 'business',
           label: '商户管理',
           icon: 'user-solid',
-          path: '/business',
+          url: '/business',
           children: [
             {
               path: '/business/add',
               name: 'businessAdd',
               label: '商户新增',
-              icon: 'edit',
+              // icon: 'edit',
               url: '/business/add'
             },
             {
@@ -123,6 +128,7 @@ export default {
           url: '/clearing/Process',
         },
       ],
+      hasOpen: false,
     };
   },
   methods: {
@@ -136,9 +142,13 @@ export default {
       this.$router.push({
         name: item.name
       })
-    }
+    },
   },
   computed: {
+    /* eslint-disable */
+    start() {
+      this.clickMenu({name: 'home'});
+    },
     noChildren() {
       return this.menu.filter(item => !item.children)
     },
@@ -148,6 +158,7 @@ export default {
     isCollapse() {
       return this.$store.state.tab.isCollapse
     }
-  }
+  },
+
 }
 </script>
