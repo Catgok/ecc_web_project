@@ -2,7 +2,7 @@
   <header>
     <div class="l-content">
       <el-button @click="handleMenu()" plain icon="el-icon-menu" size="mini"></el-button>
-      <h3 style="color: #000">首页</h3><!--      todo-->
+      <h3 style="color: #000">首页</h3><!--todo-->
     </div>
 
     <div class="r-content">

@@ -62,6 +62,11 @@ const routes = [
             },
         ]
     },
+    {
+        path: '/tmp',
+        name: 'tmp',
+        component: () => import('../views/tmp'),
+    }
 ]
 
 const router = new VueRouter({

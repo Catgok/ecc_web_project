@@ -1,34 +1,48 @@
 <template>
   <div>
-    <div>清分计算</div>
-    <div class="input">
-      <div v-for="(item,index) in input_information" :key="index">
-        <div>
-          <el-input class="input-name"
-                    placeholder="收益方名称"
-                    v-model="item.input_name"
-                    maxlength="20"
-                    show-word-limit>
-          </el-input>
-          <el-input class="input-percent"
-                    placeholder="收益比例"
-                    v-model="item.input_percent"
-                    show-word-limit>
-            <!--            eslint-disable -->
-            <template slot="append">%</template>
-          </el-input>
-
-          <button type="button" @click="downObj(item)">删除</button>
-          <button v-if="index===input_information.length-1" type="button" @click="addObj()">添加</button>
-        </div>
-      </div>
-
-      <button type="button" @click="clac()">开始计算</button>
+    <!--    <el-button type="primary" icon="el-icon-circle-plus-outline" circle size="large"></el-button>-->
+    <div style="vertical-align: middle ;padding-left: 100px;padding-top: 100px">
+      <!--      <el-button type="primary" style="padding: 10px" icon="el-icon-search">搜索</el-button>-->
+      <!--      <el-button type="primary" style="padding: 10px">立即创建</el-button>-->
+      <!--      <el-button type="primary" icon="el-icon-circle-plus-outline" circle size="large">1-->
+      <!--      </el-button>-->
+      <!--      <el-button type="primary" icon="el-icon-circle-plus-outline" circle size="mini">2-->
+      <!--      </el-button>-->
+      <!--      <el-button circle style="padding: 0" class="el-icon-circle-plus-outline"></el-button>-->
+      <!--      <el-icon class="el-icon-circle-plus" large></el-icon>-->
+      <!--      12-->
+      <i class="fa fa-plus fa-2x" style="color: blue"></i> fa-5x
+      <!--      12-->
     </div>
+    <!--    <div>清分计算</div>-->
+    <!--    <div class="input">-->
+    <!--      <div v-for="(item,index) in input_information" :key="index">-->
+    <!--        <div>-->
+    <!--          <el-input class="input-name"-->
+    <!--                    placeholder="收益方名称"-->
+    <!--                    v-model="item.input_name"-->
+    <!--                    maxlength="20"-->
+    <!--                    show-word-limit>-->
+    <!--          </el-input>-->
+    <!--          <el-input class="input-percent"-->
+    <!--                    placeholder="收益比例"-->
+    <!--                    v-model="item.input_percent"-->
+    <!--                    show-word-limit>-->
+    <!--            &lt;!&ndash;            eslint-disable &ndash;&gt;-->
+    <!--            <template slot="append">%</template>-->
+    <!--          </el-input>-->
 
-    <div class="pie">
-      <canvas id="pieChart"></canvas>
-    </div>
+    <!--          <button type="button" @click="downObj(item)">删除</button>-->
+    <!--          <button v-if="index===input_information.length-1" type="button" @click="addObj()">添加</button>-->
+    <!--        </div>-->
+    <!--      </div>-->
+
+    <!--      <button type="button" @click="clac()">开始计算</button>-->
+    <!--    </div>-->
+
+    <!--    <div class="pie">-->
+    <!--      <canvas id="pieChart"></canvas>-->
+    <!--    </div>-->
 
   </div>
 </template>
@@ -128,6 +142,42 @@ export default {
 </script>
 
 
-<style scoped>
+<style>
+.input-name {
+  width: 33vw;
+}
 
+.input-percent {
+  width: 25vw;
+}
+
+.pie {
+  width: 85vw;
+  /*height: 50vh;*/
+  margin: auto;
+  text-align: center;
+  /*border: solid red 1px;*/
+}
+
+#pieChart {
+  margin-top: 3vh;
+  /*border: solid red 1px;*/
+  text-align: center;
+  /*width: 30vw;*/
+  /*height: 40vh;*/
+}
+
+/*button {*/
+/*  width: auto;*/
+/*  height: 5vh;*/
+/*  background-color: rgba(13, 255, 221, 0.45);*/
+/*  border-radius: 22%;*/
+/*  border: rgba(13, 255, 221, 0.45);*/
+/*  margin-left: 1px;*/
+/*  margin-right: 1px;*/
+/*}*/
+
+.el-input-group__append {
+  padding: 2px;
+}
 </style>

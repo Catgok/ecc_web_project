@@ -147,7 +147,8 @@ export default {
   computed: {
     /* eslint-disable */
     start() {
-      this.clickMenu({name: 'home'});
+      // start
+      // this.clickMenu({name: 'home'});
     },
     noChildren() {
       return this.menu.filter(item => !item.children)

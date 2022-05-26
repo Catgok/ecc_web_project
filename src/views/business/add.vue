@@ -1,6 +1,7 @@
 <template>
 
-  <el-form ref="form" :model="form" label-width="80px" style="width: 25vw;padding-left: 10vw;padding-top: 1vw;font-size: 20px">
+  <el-form ref="form" :model="form" label-width="80px"
+           style="width: 25vw;padding-left: 10vw;padding-top: 1vw;font-size: 20px">
     <div style="height: 5vh;text-align: center;color: red">商户新增</div>
     <el-form-item label="商户名称">
       <el-input v-model="form.name"></el-input>
@@ -21,11 +22,11 @@
       </el-select>
     </el-form-item>
 
-    <el-form-item label="商户名称">
+    <el-form-item label="商户地址">
       <el-input v-model="form.address"></el-input>
     </el-form-item>
 
-    <el-form-item label="商户名称">
+    <el-form-item label="商户联系方式">
       <el-input v-model="form.phone"></el-input>
     </el-form-item>
 
@@ -53,7 +54,8 @@ export default {
         type: '',
         address: '',
         phone: '',
-      }
+      },
+
     }
   },
   methods: {
