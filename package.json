@@ -12,6 +12,7 @@
     "defaults": "^1.0.3",
     "element-ui": "^2.15.8",
     "font-awesome": "^4.7.0",
+    "less-loader": "^11.0.0",
     "normalize": "^0.3.1",
     "reset-css": "^5.0.1",
     "vue": "^2.6.14",

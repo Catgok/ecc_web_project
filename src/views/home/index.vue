@@ -9,8 +9,8 @@
           <div class="item">business/add</div>
           <div class="item">Todo:</div>
           <div class="item">business/delete</div>
-          <div class="item">business/query:</div>
-          <div class="item">business/update:</div>
+          <div class="item">business/query</div>
+          <div class="item">business/update</div>
           <div class="item">login</div>
           <div class="item">clearing/process</div>
           <div class="item">clearing/rulerManage</div>
