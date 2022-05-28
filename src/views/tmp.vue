@@ -28,7 +28,7 @@
     <!--                    placeholder="收益比例"-->
     <!--                    v-model="item.input_percent"-->
     <!--                    show-word-limit>-->
-    <!--            &lt;!&ndash;            eslint-disable &ndash;&gt;-->
+    <!--            &lt;!&ndash;             &ndash;&gt;-->
     <!--            <template slot="append">%</template>-->
     <!--          </el-input>-->
 
@@ -48,7 +48,6 @@
 </template>
 
 <script>
-/* eslint-disable */
 export default {
   name: "tmp",
   data() {

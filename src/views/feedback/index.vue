@@ -30,7 +30,6 @@
 
 <script>
 export default {
-  /* eslint-disable */
   name: "index",
   data() {
     return {

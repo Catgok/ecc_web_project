@@ -5,7 +5,6 @@
 
 <script>
 export default {
-  /* eslint-disable */
   name: "process",
   data() {
     return {

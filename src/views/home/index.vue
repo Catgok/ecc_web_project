@@ -24,8 +24,7 @@
 
 <script>
 export default {
-  /* eslint-disable */
-  name: "home",
+  name: "index",
   components: {},
 
   data() {

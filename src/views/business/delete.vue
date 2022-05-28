@@ -4,7 +4,6 @@
 
 <script>
 export default {
-  /* eslint-disable */
   name: "delete"
 }
 </script>

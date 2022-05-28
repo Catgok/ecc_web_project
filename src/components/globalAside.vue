@@ -10,8 +10,7 @@
         <span slot="title">{{ item.label }}</span>
       </el-menu-item>
 
-      <el-submenu style="padding: 0" v-for="item in hasChildren" :index="item.path" :key="item.path"
-                  @click="clickMenu(item)">
+      <el-submenu style="padding: 0" v-for="item in hasChildren" :index="item.path" :key="item.path">
         <template slot="title">
           <i :class="'el-icon-' + item.icon"></i>
           <span slot="title">{{ item.label }}</span>
@@ -72,60 +71,40 @@ export default {
       menu: [
         {
           path: '/',
-          name: 'home',
+          name: 'Home',
           label: '首页',
           icon: 's-home',
           url: '/home',
         },
         {
-          path: '/business',
+          path: '/business/index',
           name: 'business',
           label: '商户管理',
           icon: 'user-solid',
-          url: '/business',
-          children: [
-            {
-              path: '/business/add',
-              name: 'businessAdd',
-              label: '商户新增',
-              // icon: 'edit',
-              url: '/business/add'
-            },
-            {
-              path: '/business/delete',
-              name: 'businessDelete',
-              label: '商户注销',
-              // icon:''
-              url: '/business/delete',
-            },
-            {
-              path: '/business/update',
-              name: 'businessUpdate',
-              label: '商户信息修改',
-              // icon:''
-              url: '/business/update',
-            },
-            {
-              path: '/business/query',
-              name: 'businessQuery',
-              label: '商户信息查询',
-              // icon:''
-              url: '/business/query',
-            },
-          ]
+          url: '/business/index',
         },
         {
-          path: '/clearing/RulerManage',
-          name: 'clearingRulerManage',
-          label: '清分规则管理',
+          path: '/clearing',
+          name: 'clearingRuleManage',
+          label: '清分管理',
           icon: 's-tools',
-          url: '/clearing/RulerManage',
-        }, {
-          path: '/clearing/Process',
-          name: 'clearingProcess',
-          label: '清分处理',
-          icon: 'takeaway-box',
-          url: '/clearing/Process',
+          url: '/clearing',
+          children: [
+            {
+              path: '/clearing/rule/index',
+              name: 'clearingRule',
+              label: '清分规则管理',
+              icon: 's-tools',
+              url: '/clearing/rule/index',
+            },
+            {
+              path: '/clearing/process',
+              name: 'clearingProcess',
+              label: '清分处理',
+              icon: 'takeaway-box',
+              url: '/clearing/process',
+            },
+          ]
         },
       ],
       hasOpen: false,
@@ -145,7 +124,6 @@ export default {
     },
   },
   computed: {
-    /* eslint-disable */
     start() {
       // start
       // this.clickMenu({name: 'home'});

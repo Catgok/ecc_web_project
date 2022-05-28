@@ -21,7 +21,6 @@ import globalAside from '../components/globalAside'
 import globalHeader from "../components/globalHeader";
 
 export default {
-  /* eslint-disable */
   name: "Main",
   components: {
     globalAside,

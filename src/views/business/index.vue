@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="grid-content bg-purple" style="height: 13vw">
+    <div class="grid-content bg-purple" style="height: 14vw;font-size: 1.1vw">
       <el-row style="display: flex;flex-direction: row">
         <div class="search-item">商户名称
           <el-input class="search-item-input" v-model="queryList.name" placeholder="请输入商户名称"></el-input>
@@ -33,6 +33,7 @@
 
       <el-row style="display: flex;flex-direction: row">
         <el-button @click="businessAdd" class="search-item-button" type="primary" plain>新增</el-button>
+        <business-add ref="businessAdd"/>
         <el-button @click="businessChange" class="search-item-button" type="primary" plain style="color: lawngreen">修改
         </el-button>
         <el-button @click="businessCancellation" class=" search-item-button" type="primary" plain style="color: red">注销
@@ -41,25 +42,21 @@
 
     </div>
     <div>
-      <div>
-        <el-table ref="singleTable" :data="businessInfoList" highlight-current-row @current-change="handleCurrentChange"
-                  style="width: 100%">
-          <el-table-column type="index" width="50"></el-table-column>
-          <el-table-column property="name" label="商户名称" width="120"></el-table-column>
-          <el-table-column property="status" label="商户状态" width="120"></el-table-column>
-          <el-table-column property="type" label="商户类型" width="120"></el-table-column>
-          <el-table-column property="address" label="地址" width="220"></el-table-column>
-          <el-table-column property="phone" label="联系电话"></el-table-column>
-        </el-table>
-      </div>
+      <sub-business-info ref="subBusinessInfo"></sub-business-info>
     </div>
   </div>
 </template>
 
 <script>
+import BusinessAdd from './add'
+import SubBusinessInfo from "./subBusinessInfo";
+
 export default {
-  /* eslint-disable */
-  name: "query",
+  name: "index",
+  components: {
+    SubBusinessInfo,
+    BusinessAdd,
+  },
   data() {
     return {
       addressList: [
@@ -80,24 +77,6 @@ export default {
         status: "",
         level: "",
       },
-
-      businessInfoList: [
-        {
-          name: '玉龙山景区',
-          status: '正常',
-          type: '有限责任公司',
-          address: '云南省丽江市龙纳西族自治县',
-          phone: '13529219181',
-        },
-        {
-          name: '古城驿站区',
-          status: '注销',
-          type: '个体户',
-          address: '云南省丽江市龙纳西族自治县',
-          phone: '13529219181',
-        },
-      ],
-      currentRow: null,
     }
   },
   methods: {
@@ -112,21 +91,15 @@ export default {
     reset() {
       console.log('reset');
     },
-    setCurrent(row) {
-      this.$refs.singleTable.setCurrentRow(row);
-    },
-    handleCurrentChange(val) {
-      this.currentRow = val;
-    },
+
     businessAdd() {
-      this.$router.push('/business/add');
+      this.$refs.businessAdd.setVisible(true);
     },
     businessChange() {
-      console.log(this.currentRow);
+      this.$refs.subBusinessInfo.businessChange();
     },
     businessCancellation() {
-      console.log(this.currentRow);
-      this.currentRow.status = '注销'
+      this.$refs.subBusinessInfo.businessCancellation();
     }
   }
 }

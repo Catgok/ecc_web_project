@@ -11,27 +11,32 @@ const routes = [
         children: [
             {
                 path: '/home',
-                name: 'home',
+                name: 'Home',
                 component: () => import('../views/home/index'),
             },
 
             //clearing
             {
-                path: '/clearing/RulerManage',
-                name: 'clearingRulerManage',
-                component: () => import('../views/clearing/rulerManage'),
+                path: '/clearing',
+                name: 'clearingRuleManage',
+                component: () => import('../views/clearing/rule/index'),
             },
             {
-                path: '/clearing/Process',
+                path: '/clearing/rule/index',
+                name: 'clearingRule',
+                component: () => import('../views/clearing/rule/index'),
+            },
+            {
+                path: '/clearing/process',
                 name: 'clearingProcess',
                 component: () => import('../views/clearing/process'),
             },
 
             //business
             {
-                path: '/business',
+                path: '/business/index',
                 name: 'business',
-                component: () => import('../views/business/add'),
+                component: () => import('../views/business/index'),
             },
             {
                 path: '/business/add',
@@ -42,11 +47,6 @@ const routes = [
                 path: '/business/delete',
                 name: 'businessDelete',
                 component: () => import('../views/business/delete'),
-            },
-            {
-                path: '/business/query',
-                name: 'businessQuery',
-                component: () => import('../views/business/query'),
             },
             {
                 path: '/business/update',

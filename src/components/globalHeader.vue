@@ -24,8 +24,7 @@
 
 <script>
 export default {
-  /* eslint-disable */
-  // name: "Header"
+  name: "Header",
   data() {
     return {
       a: '1',

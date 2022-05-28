@@ -1,13 +1,9 @@
 <template>
   <div>
-
-    <div>
-      <el-button @click="clearingRuleAdd" type="primary" plain style="padding-top:10px;padding-bottom: 10px">新增
-      </el-button>
-      <el-dialog
-          title="新增清分规则"
-          :visible.sync="clearingRuleAddVisible"
-          width="40%">
+    <el-dialog
+        title="新增清分规则"
+        :visible.sync="visible"
+        width="40%">
       <span>
         <!--todo style 样式修改-->
           <el-form ref="form" :model="form" label-width="80px" style="">
@@ -48,43 +44,17 @@
 
           </el-form>
         </span>
-        <span slot="footer" class="dialog-footer">
-          <el-button @click="clearingRuleAddVisible = false" style="padding: 10px">取 消</el-button>
+      <span slot="footer" class="dialog-footer">
+          <el-button @click="visible = false" style="padding: 10px">取 消</el-button>
           <el-button type="primary" @click="clearingRuleAddSubmit()" style="padding: 10px">立即创建</el-button>
         </span>
-      </el-dialog>
-
-    </div>
-
-    <!--todo 表格-->
-    <el-table
-        :data="tableData"
-        height=100%
-        stripe
-        border
-        style="width: 80%">
-      <el-table-column
-          prop="date"
-          label="日期"
-          width="180">
-      </el-table-column>
-      <el-table-column
-          prop="name"
-          label="姓名"
-          width="180">
-      </el-table-column>
-      <el-table-column
-          prop="address"
-          label="地址">
-      </el-table-column>
-    </el-table>
+    </el-dialog>
   </div>
 </template>
 
 <script>
 export default {
-  /* eslint-disable */
-  name: "rulerManage",
+  name: "add",
   data() {
     return {
       transChannelList: [
@@ -100,60 +70,24 @@ export default {
         {label: "商户一", value: "商户一"},
         {label: "商户二", value: "商户二"},
       ],
-      clearingRuleAddVisible: false,
       clearingRuleList: [],
-      clearingRules: [
-        {
-          rule_id: "",
-          business_id: "",
-          rule_type: "",
-          content: "",
-          status: "",
-          create_by: "",
-          create_time: "",
-          update_by: "",
-          update_time: "",
-        }
-      ],
+      visible: false,
       form: {
         transChannel: '',
         transType: '',
         businessPercent: '',
         businessName: '',
       },
-      tableData: [
-        {
-          date: '2016-05-03',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        },
-        {
-          date: '2016-05-02',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        },
-        {
-          date: '2016-05-04',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        },
-      ]
     }
   },
-
   methods: {
-
     copy(obj) {
       let tmp = JSON.stringify(obj);
       return JSON.parse(tmp);
     },
 
-    clearingRuleAdd() {
-      this.clearingRuleAddVisible = true;
-      console.log('点击新增按钮成功!');
-    },
     clearingRuleAddSubmit() {
-      this.clearingRuleAddVisible = false;
+      this.visible = false;
       console.log('新增rule成功!');
       console.log(this.clearingRuleList);
     },
@@ -161,6 +95,9 @@ export default {
       this.clearingRuleList.push(this.copy(this.form));
       console.log(this.clearingRuleList);
     },
+    setVisible(status) {
+      this.visible = status;
+    }
   }
 }
 </script>
