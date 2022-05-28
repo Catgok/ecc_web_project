@@ -1,34 +1,24 @@
 <template>
   <div>
     <div>
-      <el-button @click="clearingRuleAdd" type="primary" plain style="padding-top:10px;padding-bottom: 10px">新增
+      <el-button @click="clearingRuleAdd" type="primary" plain
+                 style="margin:15px 0 10px 15px;padding-top:10px;padding-bottom: 10px">新增规则
       </el-button>
-      <rule-add ref="ruleAdd"/>
+      <rule-add @parentMethod="clearingRuleAddSubmit" ref="ruleAdd"></rule-add>
     </div>
 
-    <!--todo 表格-->
-    <el-table
-        :data="tableData"
-        height=100%
-        stripe
-        border
-        style="width: 80%">
-      <el-table-column
-          prop="date"
-          label="日期"
-          width="180">
-      </el-table-column>
-      <el-table-column
-          prop="name"
-          label="姓名"
-          width="180">
-      </el-table-column>
-      <el-table-column
-          prop="address"
-          label="地址">
-      </el-table-column>
+    <el-table ref="filterTable" :data="clearingRuleList" stripe style="margin-left:15px;width: 80%">
+      <el-table-column prop="businessName" label="商户名称" width="180" column-key="businessName"
+                       :filters="[{text: '微信', value: '微信'},{text: '商户二', value: '商户二'}]"
+                       :filter-method="filterHandler"></el-table-column>
+      <el-table-column prop="transChannel" label="交易渠道" width="180" column-key="businessName"
+                       :filters="[{text: '微信', value: '微信'},{text: '商户二', value: '商户二'}]"
+                       :filter-method="filterHandler"></el-table-column>
+      <el-table-column prop="transType" label="交易类型" width="180"></el-table-column>
+      <el-table-column prop="businessPercent" label="收益比例"></el-table-column>
     </el-table>
   </div>
+
 </template>
 
 <script>
@@ -54,33 +44,46 @@ export default {
           update_time: "",
         }
       ],
-
-      tableData: [
+      clearingRuleList: [
         {
-          date: '2016-05-03',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
+          transChannel: '微信',
+          transType: '类型二',
+          businessPercent: '60%',
+          businessName: '商户一',
         },
         {
-          date: '2016-05-02',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
+          transChannel: '支付宝',
+          transType: '类型一',
+          businessPercent: '40%',
+          businessName: '商户二',
         },
         {
-          date: '2016-05-04',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
+          transChannel: '网银',
+          transType: '类型二',
+          businessPercent: '10%',
+          businessName: '商户一',
         },
       ]
     }
   },
 
   methods: {
+    f() {
+      console.log(this.$refs.ruleAdd.getList());
+      return this.$refs.ruleAdd.getList();
+    },
+    clearingRuleAddSubmit(data) {
+      for (let i = 0; i < data.length; i++) this.clearingRuleList.push(data[i]);
+    },
     clearingRuleAdd() {
       this.$refs.ruleAdd.setVisible(true);
       console.log('点击新增按钮成功!');
+      console.log([{text: '微信', value: '微信'}, {text: '商户二', value: '商户二'}]);
     },
-
+    filterHandler(value, row, column) {
+      const property = column['property'];
+      return row[property] === value;
+    }
   }
 }
 </script>

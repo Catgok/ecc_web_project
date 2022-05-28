@@ -1,45 +1,42 @@
 <template>
   <div>
-    <el-dialog
-        title="新增清分规则"
-        :visible.sync="visible"
-        width="40%">
+    <el-dialog title="新增清分规则" :visible.sync="visible" :close-on-click-modal=false center width="40%">
       <span>
         <!--todo style 样式修改-->
-          <el-form ref="form" :model="form" label-width="80px" style="">
+          <el-form ref="form" :model="form" label-width="80px">
 
             <el-form-item label="交易渠道">
               <el-select v-model="form.transChannel" placeholder="请选择">
-                <el-option v-for="item in transChannelList" :index="item.label" :key="item.label" :label="item.label"
+                <el-option v-for="item in transChannelList" :index="item.text" :key="item.text" :label="item.text"
                            :value="item.value"></el-option>
               </el-select>
             </el-form-item>
 
             <el-form-item label="交易类型">
               <el-select v-model="form.transType" placeholder="请选择">
-                <el-option v-for="item in transTypeList" :index="item.label" :key="item.label" :label="item.label"
+                <el-option v-for="item in transTypeList" :index="item.text" :key="item.text" :label="item.text"
                            :value="item.value"></el-option>
               </el-select>
             </el-form-item>
 
-
-            <div style="border: 1px red solid;">
+            <div style="border: 2px silver solid;padding: 10px">
               <div>
-                <el-select v-model="form.businessName" placeholder="请选择商户" style="">
-                  <el-option v-for="item in businessList" :index="item.label" :key="item.label" :label="item.label"
+                <el-select v-model="form.businessName" placeholder="请选择商户">
+                  <el-option v-for="item in businessNameList" :index="item.text" :key="item.text" :label="item.text"
                              :value="item.value"></el-option>
                 </el-select>
                 <el-input v-model="form.businessPercent" placeholder="10%"
-                          style="width:100px; padding-left: 20px "></el-input>
-                <el-button class="fa fa-plus fa-2x"
-                           style="padding-top: 10px; height:40px ; width:40px;color: blue;border: 10px;text-align: center"
-                           @click="clearingRuleAddOne()"></el-button>
+                          style="width:7vw; padding-left: 20px "></el-input>
+                <el-button type="primary" style="width: 5vw;height:40px;margin-left: 20px;border: 0"
+                           @click="clearingRuleAddOne()">添 加</el-button>
               </div>
 
-              <div v-for="item in clearingRuleList" :key="item.businessName">
-                {{ item.businessName }}
-                {{ item.businessPercent }}
-              </div>
+              <el-table :data="clearingRuleList" :show-header="false" style="width: 100%;padding-top: 10px">
+                <el-table-column prop="businessName" width="120"></el-table-column>
+                <el-table-column prop="transChannel" width="120"></el-table-column>
+                <el-table-column prop="transType" width="120"></el-table-column>
+                <el-table-column prop="businessPercent"></el-table-column>
+              </el-table>
             </div>
 
           </el-form>
@@ -58,17 +55,17 @@ export default {
   data() {
     return {
       transChannelList: [
-        {label: "支付宝", value: "支付宝"},
-        {label: "微信", value: "微信"},
-        {label: "网银", value: "网银"},
+        {text: "支付宝", value: "支付宝"},
+        {text: "微信", value: "微信"},
+        {text: "网银", value: "网银"},
       ],
       transTypeList: [
-        {label: "类型一", value: "类型一"},
-        {label: "类型二", value: "类型二"},
+        {text: "类型一", value: "类型一"},
+        {text: "类型二", value: "类型二"},
       ],
-      businessList: [
-        {label: "商户一", value: "商户一"},
-        {label: "商户二", value: "商户二"},
+      businessNameList: [
+        {text: "商户一", value: "商户一"},
+        {text: "商户二", value: "商户二"},
       ],
       clearingRuleList: [],
       visible: false,
@@ -81,19 +78,35 @@ export default {
     }
   },
   methods: {
+    getList() {
+      let x = []
+      for (let i = 0; i < this.businessNameList.length; i++) x.push(this.businessNameList[i])
+      return x
+    },
     copy(obj) {
       let tmp = JSON.stringify(obj);
       return JSON.parse(tmp);
     },
-
     clearingRuleAddSubmit() {
       this.visible = false;
       console.log('新增rule成功!');
       console.log(this.clearingRuleList);
+      this.$emit("parentMethod", this.copy(this.clearingRuleList));
+      this.clearingRuleList = [];
+    },
+    check(form) {
+      for (let item in form)
+        if (form[item] === "") return false;
+      for (let i = 0; i < this.clearingRuleList.length; i++) {
+        let flag = true;
+        for (let item in form) if (form[item] !== this.clearingRuleList[i][item]) flag = false;
+        if (flag === true) return false;
+      }
+      return true;
     },
     clearingRuleAddOne() {
+      if (!this.check(this.form)) return;
       this.clearingRuleList.push(this.copy(this.form));
-      console.log(this.clearingRuleList);
     },
     setVisible(status) {
       this.visible = status;

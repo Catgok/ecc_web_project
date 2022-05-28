@@ -14,7 +14,7 @@
         </div>
 
         <div class="search-item">归属区域
-          <el-select class="search-item-select" v-model="queryList.status" placeholder="请选择">
+          <el-select class="search-item-select" v-model="queryList.address" placeholder="请选择">
             <el-option v-for="item in addressList" :key="item.address" :label="item.address"
                        :value="item.address"></el-option>
           </el-select>
@@ -23,7 +23,7 @@
 
       <el-row style="display: flex;flex-direction: row">
         <div class="search-item">商户层级
-          <el-select class="search-item-select" v-model="queryList.status" placeholder="请选择">
+          <el-select class="search-item-select" v-model="queryList.level" placeholder="请选择">
             <el-option v-for="item in levelList" :key="item.level" :label="item.level" :value="item.level"></el-option>
           </el-select>
         </div>
@@ -33,7 +33,7 @@
 
       <el-row style="display: flex;flex-direction: row">
         <el-button @click="businessAdd" class="search-item-button" type="primary" plain>新增</el-button>
-        <business-add ref="businessAdd"/>
+        <business-add ref="businessAdd"></business-add>
         <el-button @click="businessChange" class="search-item-button" type="primary" plain style="color: lawngreen">修改
         </el-button>
         <el-button @click="businessCancellation" class=" search-item-button" type="primary" plain style="color: red">注销

@@ -1,26 +1,25 @@
 <template>
   <div>
     <el-dialog
-        title="新增清分规则"
+        title="新增商户"
         :visible.sync="visible"
-        width="40%">
-      <el-form label-position="left" ref="form" :model="form" label-width="100px"
-               style="width: 25vw;padding-left: 8vw;padding-top: 2vw;font-size: 1.4vw">
-        <div style="height: 5vh;text-align: center;color: red">商户新增</div>
+        center
+        width="40vw">
+      <el-form label-position="right" ref="form" :model="form" label-width="100px"
+               style="width: 30vw;padding-left: 2vw">
         <el-form-item label="商户名称">
-          <el-input v-model="form.name"></el-input>
+          <el-input class="form-item-width" v-model="form.name"></el-input>
         </el-form-item>
 
         <el-form-item label="商户状态">
-          <el-select v-model="form.status" placeholder="请选择商户状态">
-            <el-option label="正常" value="True"></el-option>
-            <el-option label="注销" value="False"></el-option>
+          <el-select class="form-item-width" v-model="form.status" placeholder="请选择商户状态">
+            <el-option label="正常" value="正常"></el-option>
+            <el-option label="注销" value="注销"></el-option>
           </el-select>
         </el-form-item>
 
         <el-form-item label="商户类型">
-          <el-select style="width: 250px" v-model="form.type" placeholder="请选择商户类型">
-            <!--        todo style width -->
+          <el-select class="form-item-width" v-model="form.type" placeholder="请选择商户类型">
             <el-option label="有限责任公司" value="有限责任公司"></el-option>
             <el-option label="个体户" value="个体户"></el-option>
             <el-option label="股份公司" value="股份公司"></el-option>
@@ -28,16 +27,17 @@
         </el-form-item>
 
         <el-form-item label="商户地址">
-          <el-input v-model="form.address"></el-input>
+          <el-input class="form-item-width" v-model="form.address"></el-input>
         </el-form-item>
 
         <el-form-item label="商户联系方式">
-          <el-input v-model="form.phone"></el-input>
+          <el-input class="form-item-width" v-model="form.phone"></el-input>
         </el-form-item>
 
         <el-form-item>
-          <el-button type="primary" @click="onSubmit" style="padding: 10px">立即创建</el-button>
-          <el-button @click="visible = false" style="padding: 10px">取消</el-button>
+          <el-button type="primary" @click="onSubmit" style="padding: 10px;margin-left: 4vw;margin-top: 10px">立即创建
+          </el-button>
+          <el-button @click="visible = false" style="padding: 10px">取 消</el-button>
         </el-form-item>
 
       </el-form>
@@ -46,7 +46,9 @@
 </template>
 
 <style scoped>
-
+.form-item-width {
+  width: 23vw;
+}
 </style>
 
 <script>

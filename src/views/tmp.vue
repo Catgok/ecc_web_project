@@ -1,48 +1,64 @@
 <template>
   <div>
+    <el-table
+        :data="tableData"
+        :show-header=false
+        style="width: 100%">
+      <el-table-column
+          prop="date"
+          width="180">
+      </el-table-column>
+      <el-table-column
+          prop="name"
+          width="180">
+      </el-table-column>
+      <el-table-column
+          prop="address">
+      </el-table-column>
+    </el-table>
     <!--    <el-button type="primary" icon="el-icon-circle-plus-outline" circle size="large"></el-button>-->
-    <div style="vertical-align: middle ;padding-left: 100px;padding-top: 100px">
-      <!--      <el-button type="primary" style="padding: 10px" icon="el-icon-search">搜索</el-button>-->
-      <!--      <el-button type="primary" style="padding: 10px">立即创建</el-button>-->
-      <!--      <el-button type="primary" icon="el-icon-circle-plus-outline" circle size="large">1-->
-      <!--      </el-button>-->
-      <!--      <el-button type="primary" icon="el-icon-circle-plus-outline" circle size="mini">2-->
-      <!--      </el-button>-->
-      <!--      <el-button circle style="padding: 0" class="el-icon-circle-plus-outline"></el-button>-->
-      <!--      <el-icon class="el-icon-circle-plus" large></el-icon>-->
-      <!--      12-->
-      <i class="fa fa-plus fa-2x" style="color: blue"></i> fa-5x
-      <!--      12-->
-    </div>
-    <!--    <div>清分计算</div>-->
-    <!--    <div class="input">-->
-    <!--      <div v-for="(item,index) in input_information" :key="index">-->
-    <!--        <div>-->
-    <!--          <el-input class="input-name"-->
-    <!--                    placeholder="收益方名称"-->
-    <!--                    v-model="item.input_name"-->
-    <!--                    maxlength="20"-->
-    <!--                    show-word-limit>-->
-    <!--          </el-input>-->
-    <!--          <el-input class="input-percent"-->
-    <!--                    placeholder="收益比例"-->
-    <!--                    v-model="item.input_percent"-->
-    <!--                    show-word-limit>-->
-    <!--            &lt;!&ndash;             &ndash;&gt;-->
-    <!--            <template slot="append">%</template>-->
-    <!--          </el-input>-->
+    <!--    <div style="vertical-align: middle ;padding-left: 100px;padding-top: 100px">-->
+    <!--      <el-button type="primary" style="padding: 10px" icon="el-icon-search">搜索</el-button>-->
+    <!--      <el-button type="primary" style="padding: 10px">立即创建</el-button>-->
+    <!--      <el-button type="primary" icon="el-icon-circle-plus-outline" circle size="large">1-->
+    <!--      </el-button>-->
+    <!--      <el-button type="primary" icon="el-icon-circle-plus-outline" circle size="mini">2-->
+    <!--      </el-button>-->
+    <!--      <el-button circle style="padding: 0" class="el-icon-circle-plus-outline"></el-button>-->
+    <!--      <el-icon class="el-icon-circle-plus" large></el-icon>-->
+    <!--      12-->
+    <!--      <i class="fa fa-plus fa-2x" style="color: blue"></i> fa-5x-->
+    <!--      12-->
+  </div>
+  <!--    <div>清分计算</div>-->
+  <!--    <div class="input">-->
+  <!--      <div v-for="(item,index) in input_information" :key="index">-->
+  <!--        <div>-->
+  <!--          <el-input class="input-name"-->
+  <!--                    placeholder="收益方名称"-->
+  <!--                    v-model="item.input_name"-->
+  <!--                    maxlength="20"-->
+  <!--                    show-word-limit>-->
+  <!--          </el-input>-->
+  <!--          <el-input class="input-percent"-->
+  <!--                    placeholder="收益比例"-->
+  <!--                    v-model="item.input_percent"-->
+  <!--                    show-word-limit>-->
+  <!--            &lt;!&ndash;             &ndash;&gt;-->
+  <!--            <template slot="append">%</template>-->
+  <!--          </el-input>-->
 
-    <!--          <button type="button" @click="downObj(item)">删除</button>-->
-    <!--          <button v-if="index===input_information.length-1" type="button" @click="addObj()">添加</button>-->
-    <!--        </div>-->
-    <!--      </div>-->
+  <!--          <button type="button" @click="downObj(item)">删除</button>-->
+  <!--          <button v-if="index===input_information.length-1" type="button" @click="addObj()">添加</button>-->
+  <!--        </div>-->
+  <!--      </div>-->
 
-    <!--      <button type="button" @click="clac()">开始计算</button>-->
-    <!--    </div>-->
+  <!--      <button type="button" @click="clac()">开始计算</button>-->
+  <!--    </div>-->
 
-    <!--    <div class="pie">-->
-    <!--      <canvas id="pieChart"></canvas>-->
-    <!--    </div>-->
+  <!--    <div class="pie">-->
+  <!--      <canvas id="pieChart"></canvas>-->
+  <!--    </div>-->
 
   </div>
 </template>
@@ -55,6 +71,23 @@ export default {
       input_information: [
         {input_name: '', input_percent: ''},
       ],
+      tableData: [{
+        date: '2016-05-02',
+        name: '王小虎',
+        address: '上海市普陀区金沙江路 1518 弄'
+      }, {
+        date: '2016-05-04',
+        name: '王小虎',
+        address: '上海市普陀区金沙江路 1517 弄'
+      }, {
+        date: '2016-05-01',
+        name: '王小虎',
+        address: '上海市普陀区金沙江路 1519 弄'
+      }, {
+        date: '2016-05-03',
+        name: '王小虎',
+        address: '上海市普陀区金沙江路 1516 弄'
+      }],
       color_lists: [
         'rgba(255, 99, 132, 0.5)',
         'rgba(54, 162, 235, 0.5)',
