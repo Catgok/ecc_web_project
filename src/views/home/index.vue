@@ -1,7 +1,7 @@
 <template>
   <div class="12">
     <el-row class="home" :gutter="20">
-      <el-col :span="3" style="margin-top: 20px">
+      <el-col :span="3" style="margin: 3vw 0 0 22vw">
 
         <el-card class="box-card">
           <div class="item">Finished：</div>

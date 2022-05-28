@@ -2,19 +2,21 @@
   <div>
     <div>
       <el-button @click="clearingRuleAdd" type="primary" plain
-                 style="margin:15px 0 10px 15px;padding-top:10px;padding-bottom: 10px">新增规则
+                 style="margin:20px 0 15px 40px;padding-top:10px;padding-bottom: 10px">新增规则
       </el-button>
       <rule-add @parentMethod="clearingRuleAddSubmit" ref="ruleAdd"></rule-add>
     </div>
 
-    <el-table ref="filterTable" :data="clearingRuleList" stripe style="margin-left:15px;width: 80%">
-      <el-table-column prop="businessName" label="商户名称" width="180" column-key="businessName"
-                       :filters="[{text: '微信', value: '微信'},{text: '商户二', value: '商户二'}]"
+    <el-table ref="filterTable" :data="clearingRuleList" stripe style="margin-left:40px;width: 85%;font-size: 1.2vw;">
+      <el-table-column prop="businessName" label="商户名称" width="300"
+                       :filters=this.$store.state.rule.businessNameList
                        :filter-method="filterHandler"></el-table-column>
-      <el-table-column prop="transChannel" label="交易渠道" width="180" column-key="businessName"
-                       :filters="[{text: '微信', value: '微信'},{text: '商户二', value: '商户二'}]"
+      <el-table-column prop="transChannel" label="交易渠道" width="200"
+                       :filters=this.$store.state.rule.transChannelList
                        :filter-method="filterHandler"></el-table-column>
-      <el-table-column prop="transType" label="交易类型" width="180"></el-table-column>
+      <el-table-column prop="transType" label="交易类型" width="200"
+                       :filters=this.$store.state.rule.transTypeList
+                       :filter-method="filterHandler"></el-table-column>
       <el-table-column prop="businessPercent" label="收益比例"></el-table-column>
     </el-table>
   </div>
@@ -68,10 +70,10 @@ export default {
   },
 
   methods: {
-    f() {
-      console.log(this.$refs.ruleAdd.getList());
-      return this.$refs.ruleAdd.getList();
-    },
+    // f() {
+    //   console.log(this.$refs.ruleAdd.getList());
+    //   return this.$refs.ruleAdd.getList();
+    // },
     clearingRuleAddSubmit(data) {
       for (let i = 0; i < data.length; i++) this.clearingRuleList.push(data[i]);
     },

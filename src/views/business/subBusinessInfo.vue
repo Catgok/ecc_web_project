@@ -1,13 +1,13 @@
 <template>
   <div>
     <div>
-      <el-table ref="multipleTable" :data="businessInfoList" tooltip-effect="dark"
+      <el-table ref="multipleTable" :data="businessInfoList" tooltip-effect="dark" style="font-size: 1.2vw"
                 @selection-change="handleSelectionChange">
         <el-table-column type="selection" width="auto"></el-table-column>
-        <el-table-column property="name" label="商户名称" width="120"></el-table-column>
+        <el-table-column property="name" label="商户名称" width="250"></el-table-column>
         <el-table-column property="status" label="商户状态" width="120"></el-table-column>
-        <el-table-column property="type" label="商户类型" width="120"></el-table-column>
-        <el-table-column property="address" label="地址" width="220"></el-table-column>
+        <el-table-column property="type" label="商户类型" width="200"></el-table-column>
+        <el-table-column property="address" label="地址" width="300"></el-table-column>
         <el-table-column property="phone" label="联系电话"></el-table-column>
       </el-table>
     </div>

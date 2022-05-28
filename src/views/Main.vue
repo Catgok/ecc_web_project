@@ -1,5 +1,6 @@
 <template>
   <div class="main">
+    <global-tip-dialog></global-tip-dialog>
     <el-container style="height: 100%">
       <el-aside width="auto">
         <global-aside></global-aside>
@@ -17,15 +18,17 @@
 </template>
 
 <script>
-import globalAside from '../components/globalAside'
-import globalHeader from "../components/globalHeader";
+import GlobalAside from '../components/globalAside'
+import GlobalHeader from "../components/globalHeader";
+import GlobalTipDialog from "../components/globalTipDialog";
 
 export default {
   name: "Main",
   components: {
-    globalAside,
-    globalHeader
-  }
+    GlobalAside,
+    GlobalHeader,
+    GlobalTipDialog
+  },
 }
 </script>
 

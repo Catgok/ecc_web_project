@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="grid-content bg-purple" style="height: 14vw;font-size: 1.1vw">
+    <div class="grid-content bg-purple" style="height: 14vw;font-size: 1.2vw">
       <el-row style="display: flex;flex-direction: row">
         <div class="search-item">商户名称
           <el-input class="search-item-input" v-model="queryList.name" placeholder="请输入商户名称"></el-input>
@@ -87,9 +87,11 @@ export default {
 
     search() {
       console.log('search');
+      //todo
     },
     reset() {
       console.log('reset');
+      //todo
     },
 
     businessAdd() {

@@ -1,29 +1,28 @@
 <template>
   <div>
-    <el-dialog title="新增清分规则" :visible.sync="visible" :close-on-click-modal=false center width="40%">
+    <el-dialog title="新增清分规则" :visible.sync="visible" :close-on-click-modal=false center width="45%">
       <span>
-        <!--todo style 样式修改-->
           <el-form ref="form" :model="form" label-width="80px">
 
             <el-form-item label="交易渠道">
               <el-select v-model="form.transChannel" placeholder="请选择">
-                <el-option v-for="item in transChannelList" :index="item.text" :key="item.text" :label="item.text"
-                           :value="item.value"></el-option>
+                <el-option v-for="item in this.$store.state.rule.transChannelList" :index="item.text"
+                           :key="item.text" :label="item.text" :value="item.value"></el-option>
               </el-select>
             </el-form-item>
 
             <el-form-item label="交易类型">
               <el-select v-model="form.transType" placeholder="请选择">
-                <el-option v-for="item in transTypeList" :index="item.text" :key="item.text" :label="item.text"
-                           :value="item.value"></el-option>
+                <el-option v-for="item in this.$store.state.rule.transTypeList" :index="item.text"
+                           :key="item.text" :label="item.text" :value="item.value"></el-option>
               </el-select>
             </el-form-item>
 
-            <div style="border: 2px silver solid;padding: 10px">
+            <div style="border: 2px silver solid;padding: 5% 0 0 4%">
               <div>
                 <el-select v-model="form.businessName" placeholder="请选择商户">
-                  <el-option v-for="item in businessNameList" :index="item.text" :key="item.text" :label="item.text"
-                             :value="item.value"></el-option>
+                  <el-option v-for="item in this.$store.state.rule.businessNameList" :index="item.text"
+                             :key="item.text" :label="item.text" :value="item.value"></el-option>
                 </el-select>
                 <el-input v-model="form.businessPercent" placeholder="10%"
                           style="width:7vw; padding-left: 20px "></el-input>
@@ -42,7 +41,7 @@
           </el-form>
         </span>
       <span slot="footer" class="dialog-footer">
-          <el-button @click="visible = false" style="padding: 10px">取 消</el-button>
+          <el-button @click="clearingRuleAddCancel()" style="padding: 10px">取 消</el-button>
           <el-button type="primary" @click="clearingRuleAddSubmit()" style="padding: 10px">立即创建</el-button>
         </span>
     </el-dialog>
@@ -54,19 +53,6 @@ export default {
   name: "add",
   data() {
     return {
-      transChannelList: [
-        {text: "支付宝", value: "支付宝"},
-        {text: "微信", value: "微信"},
-        {text: "网银", value: "网银"},
-      ],
-      transTypeList: [
-        {text: "类型一", value: "类型一"},
-        {text: "类型二", value: "类型二"},
-      ],
-      businessNameList: [
-        {text: "商户一", value: "商户一"},
-        {text: "商户二", value: "商户二"},
-      ],
       clearingRuleList: [],
       visible: false,
       form: {
@@ -78,14 +64,13 @@ export default {
     }
   },
   methods: {
-    getList() {
-      let x = []
-      for (let i = 0; i < this.businessNameList.length; i++) x.push(this.businessNameList[i])
-      return x
-    },
     copy(obj) {
       let tmp = JSON.stringify(obj);
       return JSON.parse(tmp);
+    },
+    clearingRuleAddCancel() {
+      this.visible = false;
+      this.clearingRuleList = [];
     },
     clearingRuleAddSubmit() {
       this.visible = false;
@@ -105,7 +90,11 @@ export default {
       return true;
     },
     clearingRuleAddOne() {
-      if (!this.check(this.form)) return;
+      if (!this.check(this.form)) {
+        this.$store.commit("changeGlobalTipDialogVisible");
+        this.$store.commit("setGlobalTip", "信息为空或已重复。");
+        return;
+      }
       this.clearingRuleList.push(this.copy(this.form));
     },
     setVisible(status) {
