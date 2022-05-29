@@ -1,5 +1,5 @@
 <template>
-  <el-dialog title="提示" :visible.sync="tipDialogVisible" width="30%" :before-close="handleClose">
+  <el-dialog title="提示" :visible.sync="tipDialogVisible" width="30%" center :before-close="handleClose">
     <span>{{ this.$store.state.tab.globalTip }}</span>
   </el-dialog>
 </template>

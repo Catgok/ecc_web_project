@@ -6,12 +6,15 @@ export default {
             {text: "网银", value: "网银"},
         ],
         transTypeList: [
-            {text: "类型一", value: "类型一"},
-            {text: "类型二", value: "类型二"},
+            {text: "余额", value: "余额"},
+            {text: "月卡", value: "月卡"},
+            {text: "现金", value: "现金"},
         ],
         businessNameList: [
-            {text: "商户一", value: "商户一"},
-            {text: "商户二", value: "商户二"},
+            {text: "玉龙山景区", value: "玉龙山景区"},
+            {text: "古城驿站区", value: "古城驿站区"},
+            {text: "沙溪古镇", value: "沙溪古镇"},
+            {text: "滇池风景区", value: "滇池风景区"},
         ],
     },
     mutations: {

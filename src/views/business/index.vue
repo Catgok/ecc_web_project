@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div class="grid-content bg-purple" style="height: 14vw;font-size: 1.2vw">
+  <div v-on="start">
+    <div class="grid-content bg-purple" style="height: 14vw;font-size: 1.2vw;">
       <el-row style="display: flex;flex-direction: row">
         <div class="search-item">商户名称
           <el-input class="search-item-input" v-model="queryList.name" placeholder="请输入商户名称"></el-input>
@@ -14,9 +14,9 @@
         </div>
 
         <div class="search-item">归属区域
-          <el-select class="search-item-select" v-model="queryList.address" placeholder="请选择">
-            <el-option v-for="item in addressList" :key="item.address" :label="item.address"
-                       :value="item.address"></el-option>
+          <el-select class="search-item-select" v-model="queryList.region" placeholder="请选择">
+            <el-option v-for="item in regionList" :key="item.region" :label="item.region"
+                       :value="item.region"></el-option>
           </el-select>
         </div>
       </el-row>
@@ -62,21 +62,19 @@ export default {
   },
   data() {
     return {
-      addressList: [
-        {address: "add1"},
-        {address: "add2"},
-      ],
+      regionList: [],
       statusList: [
-        {status: "0"},
-        {status: "1"},
+        {status: "正常"},
+        {status: "注销"},
       ],
       levelList: [
-        {level: "0"},
-        {level: "1"},
+        {level: "第一层"},
+        {level: "第二层"},
+        {level: "第三层"},
       ],
       queryList: {
         name: "",
-        address: "",
+        region: "",
         status: "",
         level: "",
       },
@@ -88,11 +86,11 @@ export default {
       return JSON.parse(tmp);
     },
     search() {
-      console.log('search');
       this.$refs.subBusinessInfo.businessQuery(this.copy(this.queryList));
     },
     reset() {
       for (let item in this.queryList) this.queryList[item] = "";
+      this.$refs.subBusinessInfo.businessInfoList = this.$store.state.business.businessInfoList;
     },
 
     businessAdd() {
@@ -111,6 +109,17 @@ export default {
     businessCancellation() {
       this.$refs.subBusinessInfo.businessCancellation();
     }
+  },
+  computed: {
+    start() {
+      let tmp = this.$store.state.business.businessInfoList;
+      for (let i = 0; i < tmp.length; i++) {
+        let flag = true;
+        for (let j = 0; j < this.regionList.length; j++)
+          if (this.regionList[j]["region"] === tmp[i]["region"]) flag = false;
+        if (flag) this.regionList.push({"region": tmp[i]["region"]});
+      }
+    },
   }
 }
 </script>

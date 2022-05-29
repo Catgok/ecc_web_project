@@ -1,29 +1,19 @@
 <template>
   <div class="feedback-main">
     <div class="feedback-main-header">信息反馈</div>
-    <el-select v-model="type" placeholder="请选择反馈类型">
-      <el-option
-          v-for="item in options"
-          :key="item.value"
-          :label="item.label"
-          :value="item.value">
+    <el-select v-model="feedbackType" placeholder="请选择反馈类型">
+      <el-option v-for="item in feedbackOptions" :key="item.value" :label="item.label" :value="item.value">
       </el-option>
     </el-select>
     <br><br>
 
-    <el-input
-        style="width: 80%; text-align: center"
-        type="textarea"
-        :rows="15"
-        maxlength="100"
-        placeholder="请输入内容"
-        show-word-limit
-        v-model="feedbackInformation">
+    <el-input style="width: 80%; text-align: center" type="textarea" :rows="15" maxlength="100" placeholder="请输入内容"
+              show-word-limit v-model="feedbackInformation">
     </el-input>
     <br><br>
     <el-row class="submit">
-      <el-button>取消</el-button>
-      <el-button type="primary">确定</el-button>
+      <el-button>取 消</el-button>
+      <el-button @click="onSubmit" type="primary">确 定</el-button>
     </el-row>
   </div>
 </template>
@@ -33,9 +23,9 @@ export default {
   name: "index",
   data() {
     return {
-      feedbackInformation: '',
-      type: '',
-      options: [
+      feedbackInformation: "",
+      feedbackType: "",
+      feedbackOptions: [
         {
           value: '选项1',
           label: '反馈类型1'
@@ -56,8 +46,16 @@ export default {
     }
   },
   methods: {
+    check() {
+      return this.feedbackInformation === "" || this.feedbackType === "";
+    },
     onSubmit() {
-      console.log('反馈成功!');
+      this.$store.commit("changeGlobalTipDialogVisible");
+      if (!this.check()) {
+        this.$store.commit("setGlobalTip", "反馈成功！");
+      } else {
+        this.$store.commit("setGlobalTip", "反馈类型或内容不能为空。");
+      }
     }
   }
 }
@@ -73,7 +71,7 @@ export default {
   height: 7vh;
   width: 80%;
   text-align: center;
-  color: rgb(102,177,255);
+  color: rgb(102, 177, 255);
   font-size: 35px;
   font-weight: bolder
 }

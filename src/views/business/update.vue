@@ -25,6 +25,10 @@
           <el-input class="form-item-width" v-model="form.address"></el-input>
         </el-form-item>
 
+        <el-form-item label="归属区域">
+          <el-input class="form-item-width" v-model="form.region"></el-input>
+        </el-form-item>
+
         <el-form-item label="商户联系方式">
           <el-input class="form-item-width" v-model="form.phone"></el-input>
         </el-form-item>
