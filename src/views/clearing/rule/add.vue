@@ -69,8 +69,8 @@ export default {
       return JSON.parse(tmp);
     },
     clearingRuleAddCancel() {
-      this.visible = false;
       this.clearingRuleList = [];
+      this.visible = false;
     },
     clearingRuleAddSubmit() {
       this.visible = false;

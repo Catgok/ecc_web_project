@@ -44,11 +44,6 @@ const routes = [
                 component: () => import('../views/business/add'),
             },
             {
-                path: '/business/delete',
-                name: 'businessDelete',
-                component: () => import('../views/business/delete'),
-            },
-            {
                 path: '/business/update',
                 name: 'businessUpdate',
                 component: () => import('../views/business/update'),

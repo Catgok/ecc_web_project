@@ -1,12 +1,7 @@
 <template>
   <div>
-    <el-dialog
-        title="新增商户"
-        :visible.sync="visible"
-        center
-        width="40vw">
-      <el-form label-position="left" ref="form" :model="form" label-width="100px"
-               style="width: 30vw;padding-left: 2vw">
+    <el-dialog title="新增商户" :visible.sync="visible" center width="40vw">
+      <el-form label-position="left" ref="form" :model="form" label-width="100px" style="width: 30vw;padding-left: 2vw">
         <el-form-item label="商户名称">
           <el-input class="form-item-width" v-model="form.name"></el-input>
         </el-form-item>
@@ -38,7 +33,7 @@
           <el-button type="primary" @click="businessAddSubmit" style="padding: 10px;margin-left: 4vw;margin-top: 10px">
             立即创建
           </el-button>
-          <el-button @click="visible = false" style="padding: 10px">取 消</el-button>
+          <el-button @click="businessAddCancel" style="padding: 10px">取 消</el-button>
         </el-form-item>
 
       </el-form>
@@ -68,9 +63,28 @@ export default {
     }
   },
   methods: {
+    copy(obj) {
+      let tmp = JSON.stringify(obj);
+      return JSON.parse(tmp);
+    },
+
+    check(form) {
+      for (let item in form)
+        if (form[item] === "") return false;
+      return true;
+    },
     businessAddSubmit() {
+      if (!this.check(this.form)) {
+        this.$store.commit("changeGlobalTipDialogVisible");
+        this.$store.commit("setGlobalTip", "信息为空。");
+        return;
+      }
+      this.$store.state.business.businessInfoList.push(this.copy(this.form));
+      this.businessAddCancel();
+    },
+    businessAddCancel() {
+      for (let item in this.form) this.form[item] = "";
       this.visible = false;
-      console.log('新增商户成功!');
     },
     setVisible(status) {
       this.visible = status;

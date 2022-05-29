@@ -3,7 +3,6 @@ export default {
         isCollapse: false,
         globalTipDialogVisible: false,
         globalTip: "这是提示。",
-
     },
     mutations: {
         collapseMenu(state) {

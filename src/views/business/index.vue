@@ -36,6 +36,7 @@
         <business-add ref="businessAdd"></business-add>
         <el-button @click="businessChange" class="search-item-button" type="primary" plain style="color: lawngreen">修改
         </el-button>
+        <business-update ref="businessUpdate"></business-update>
         <el-button @click="businessCancellation" class=" search-item-button" type="primary" plain style="color: red">注销
         </el-button>
       </el-row>
@@ -50,12 +51,14 @@
 <script>
 import BusinessAdd from './add'
 import SubBusinessInfo from "./subBusinessInfo";
+import BusinessUpdate from "./update";
 
 export default {
   name: "index",
   components: {
     SubBusinessInfo,
     BusinessAdd,
+    BusinessUpdate,
   },
   data() {
     return {
@@ -84,21 +87,26 @@ export default {
       let tmp = JSON.stringify(obj);
       return JSON.parse(tmp);
     },
-
     search() {
       console.log('search');
-      //todo
+      this.$refs.subBusinessInfo.businessQuery(this.copy(this.queryList));
     },
     reset() {
-      console.log('reset');
-      //todo
+      for (let item in this.queryList) this.queryList[item] = "";
     },
 
     businessAdd() {
       this.$refs.businessAdd.setVisible(true);
     },
     businessChange() {
-      this.$refs.subBusinessInfo.businessChange();
+      let form = this.$refs.subBusinessInfo.businessChange();
+      if (form === "") {
+        this.$store.commit("changeGlobalTipDialogVisible");
+        this.$store.commit("setGlobalTip", "只能修改一条。");
+        return;
+      }
+      this.$refs.businessUpdate.setBusinessInfo(form);
+      this.$refs.businessUpdate.setVisible(true);
     },
     businessCancellation() {
       this.$refs.subBusinessInfo.businessCancellation();
