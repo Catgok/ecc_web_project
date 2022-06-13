@@ -53,6 +53,8 @@ export default {
       this.$store.commit("changeGlobalTipDialogVisible");
       if (!this.check()) {
         this.$store.commit("setGlobalTip", "反馈成功！");
+        this.feedbackInformation=null;
+        this.feedbackType=null;
       } else {
         this.$store.commit("setGlobalTip", "反馈类型或内容不能为空。");
       }

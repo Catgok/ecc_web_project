@@ -77,8 +77,8 @@ export default {
 
     check(form) {
       for (let item in form)
-        if (form[item] === "") return false;
-      return true;
+        if (form[item] !== "") return true;
+      return false;
     },
     accountAddSubmit() {
       if (!this.check(this.form)) {

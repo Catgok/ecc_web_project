@@ -90,13 +90,13 @@ export default {
           icon: 'user-solid',
           url: '/account/index',
         },
-        {
-          path: '/subject/index',
-          name: 'subject',
-          label: '科目管理',
-          icon: 'user-solid',
-          url: '/subject/index',
-        },
+        // {
+        //   path: '/subject/index',
+        //   name: 'subject',
+        //   label: '科目管理',
+        //   icon: 'user-solid',
+        //   url: '/subject/index',
+        // },
         {
           path: '/clearing',
           name: 'clearingRuleManage',

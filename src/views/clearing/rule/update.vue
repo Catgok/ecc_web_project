@@ -65,8 +65,8 @@ export default {
 
     check(form) {
       for (let item in form)
-        if (form[item] === "") return false;
-      return true;
+        if (form[item] !== "") return true;
+      return false;
     },
     check_equal(obj1, obj2) {
       for (let item in obj1) if (obj1[item] !== obj2[item]) return false;
