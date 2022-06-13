@@ -2,18 +2,18 @@
   <div v-on="start">
     <div class="grid-content bg-purple" style="height: 14vw;font-size: 1.2vw;">
       <el-row style="display: flex;flex-direction: row">
-        <div class="search-item">商户名称
-          <el-input class="search-item-input" v-model="queryList.name" placeholder="请输入商户名称"></el-input>
+        <div class="search-item">账户编号
+          <el-input class="search-item-input" v-model="queryList.name" placeholder="请输入账户编号"></el-input>
         </div>
 
-        <div class="search-item">商户状态
+        <div class="search-item">账户类型
           <el-select class="search-item-select" v-model="queryList.status" placeholder="请选择">
             <el-option v-for="item in statusList" :key="item.status" :label="item.status"
                        :value="item.status"></el-option>
           </el-select>
         </div>
 
-        <div class="search-item">归属区域
+        <div class="search-item">开户银行
           <el-select class="search-item-select" v-model="queryList.region" placeholder="请选择">
             <el-option v-for="item in regionList" :key="item.region" :label="item.region"
                        :value="item.region"></el-option>
@@ -22,7 +22,12 @@
       </el-row>
 
       <el-row style="display: flex;flex-direction: row">
-        <div class="search-item">商户层级
+        <div class="search-item">商户id
+          <el-select class="search-item-select" v-model="queryList.level" placeholder="请选择">
+            <el-option v-for="item in levelList" :key="item.level" :label="item.level" :value="item.level"></el-option>
+          </el-select>
+        </div>
+        <div class="search-item">状态
           <el-select class="search-item-select" v-model="queryList.level" placeholder="请选择">
             <el-option v-for="item in levelList" :key="item.level" :label="item.level" :value="item.level"></el-option>
           </el-select>
@@ -32,33 +37,33 @@
       </el-row>
 
       <el-row style="display: flex;flex-direction: row">
-        <el-button @click="businessAdd" class="search-item-button" type="primary" plain>新增</el-button>
-        <business-add @parentMethod="update" ref="businessAdd"></business-add>
-        <el-button @click="businessChange" class="search-item-button" type="primary" plain style="color: lawngreen">修改
+        <el-button @click="accountAdd" class="search-item-button" type="primary" plain>新增</el-button>
+        <account-add @parentMethod="update" ref="accountAdd"></account-add>
+        <el-button @click="accountChange" class="search-item-button" type="primary" plain style="color: lawngreen">修改
         </el-button>
-        <business-update @parentMethod="update" ref="businessUpdate"></business-update>
-        <el-button @click="businessCancellation" class=" search-item-button" type="primary" plain style="color: red">注销
+        <account-update ref="accountUpdate"></account-update>
+        <el-button @click="accountCancellation" class=" search-item-button" type="primary" plain style="color: red">注销
         </el-button>
       </el-row>
 
     </div>
     <div>
-      <sub-business-info ref="subBusinessInfo"></sub-business-info>
+      <account-info ref="accountInfo"></account-info>
     </div>
   </div>
 </template>
 
 <script>
-import BusinessAdd from './add'
-import SubBusinessInfo from "./subBusinessInfo";
-import BusinessUpdate from "./update";
+import accountAdd from './add'
+import accountUpdate from "./update";
+import accountInfo from "./accountInfo";
 
 export default {
   name: "index",
   components: {
-    SubBusinessInfo,
-    BusinessAdd,
-    BusinessUpdate,
+    accountAdd,
+    accountUpdate,
+    accountInfo,
   },
   data() {
     return {
@@ -86,36 +91,36 @@ export default {
       return JSON.parse(tmp);
     },
     search() {
-      this.$refs.subBusinessInfo.businessQuery(this.copy(this.queryList));
+      this.$refs.accountInfo.accountQuery(this.copy(this.queryList));
     },
     reset() {
       for (let item in this.queryList) this.queryList[item] = "";
-      this.$refs.subBusinessInfo.businessInfoList = this.$store.state.business.businessInfoList;
+      this.$refs.accountInfo.accountInfoList = this.$store.state.business.accountList;
     },
 
-    businessAdd() {
-      this.$refs.businessAdd.setVisible(true);
+    accountAdd() {
+      this.$refs.accountAdd.setVisible(true);
     },
-    businessChange() {
-      let form = this.$refs.subBusinessInfo.businessChange();
+    accountChange() {
+      let form = this.$refs.accountInfo.accountChange();
       if (form === "") {
         this.$store.commit("changeGlobalTipDialogVisible");
         this.$store.commit("setGlobalTip", "只能修改一条。");
         return;
       }
-      this.$refs.businessUpdate.setBusinessInfo(form);
-      this.$refs.businessUpdate.setVisible(true);
+      this.$refs.accountUpdate.setAccountInfo(form);
+      this.$refs.accountUpdate.setVisible(true);
     },
-    businessCancellation() {
-      this.$refs.subBusinessInfo.businessCancellation();
+    accountCancellation() {
+      this.$refs.accountInfo.accountCancellation();
     },
     update() {
-      this.$refs.subBusinessInfo.update();
+      this.$refs.accountInfo.update();
     }
   },
   computed: {
     start() {
-      let tmp = this.$store.state.business.businessInfoList;
+      let tmp = this.$store.state.business.accountList;
       for (let i = 0; i < tmp.length; i++) {
         let flag = true;
         for (let j = 0; j < this.regionList.length; j++)

@@ -1,47 +1,40 @@
 <template>
   <div>
-    <el-dialog title="修改商户信息" :visible.sync="visible" center width="40vw">
+    <el-dialog title="修改账户" :visible.sync="visible" center width="40vw">
       <el-form label-position="left" ref="form" :model="form" label-width="100px" style="width: 30vw;padding-left: 2vw">
-        <el-form-item label="商户类型">
-          <el-select class="form-item-width" v-model="form.type" placeholder="请选择商户类型">
-            <el-option label="有限责任公司" value="有限责任公司"></el-option>
-            <el-option label="个体户" value="个体户"></el-option>
-            <el-option label="股份公司" value="股份公司"></el-option>
+        <el-form-item label="账户类型">
+          <el-select class="form-item-width" v-model="form.type" placeholder="请选择账户类型">
+            <el-option label="账户类型1" value="账户类型1"></el-option>
+            <el-option label="账户类型2" value="账户类型2"></el-option>
+            <el-option label="账户类型3" value="账户类型3"></el-option>
+            <el-option label="账户类型4" value="账户类型4"></el-option>
           </el-select>
         </el-form-item>
 
-        <el-form-item label="商户名称">
-          <el-input class="form-item-width" v-model="form.name"></el-input>
+        <el-form-item label="开户银行">
+          <el-input class="form-item-width" v-model="form.bank"></el-input>
         </el-form-item>
 
-        <el-form-item label="商户密码">
-          <el-input class="form-item-width" v-model="form.pass" show-password></el-input>
+        <el-form-item label="商户id">
+          <el-input class="form-item-width" v-model="form.business"></el-input>
         </el-form-item>
-        <el-form-item label="商户状态">
-          <el-select class="form-item-width" v-model="form.status" placeholder="请选择商户状态">
+
+        <el-form-item label="账户状态">
+          <el-select class="form-item-width" v-model="form.status" placeholder="请选择账户状态">
             <el-option label="正常" value="0"></el-option>
             <el-option label="注销" value="1"></el-option>
           </el-select>
         </el-form-item>
 
-        <el-form-item label="上级商户编号">
-          <el-input class="form-item-width" v-model="form.parent"></el-input>
-        </el-form-item>
-        <el-form-item label="商户地址">
-          <el-input class="form-item-width" v-model="form.address"></el-input>
-        </el-form-item>
-        <el-form-item label="联系电话">
-          <el-input class="form-item-width" v-model="form.phone"></el-input>
-        </el-form-item>
         <el-form-item label="备注">
           <el-input class="form-item-width" v-model="form.remark"></el-input>
         </el-form-item>
 
         <el-form-item>
-          <el-button type="primary" @click="businessUpdateSubmit"
-                     style="padding: 10px;margin-left: 4vw;margin-top: 10px"> 确认修改
+          <el-button type="primary" @click="accountUpdateSubmit"
+                     style="padding: 10px;margin-left: 4vw;margin-top: 10px"> 确 定
           </el-button>
-          <el-button @click="businessUpdateCancel" style="padding: 10px">取 消</el-button>
+          <el-button @click="accountUpdateCancel" style="padding: 10px">取 消</el-button>
         </el-form-item>
 
       </el-form>
@@ -64,7 +57,7 @@ export default {
       let tmp = JSON.stringify(obj);
       return JSON.parse(tmp);
     },
-    setBusinessInfo(form) {
+    setAccountInfo(form) {
       this.oldInfo = this.copy(form);
       this.form = this.copy(form);
     },
@@ -82,7 +75,7 @@ export default {
       for (let item in obj2) if (obj1[item] !== obj2[item]) return false;
       return true;
     },
-    businessUpdateSubmit() {
+    accountUpdateSubmit() {
       if (!this.check(this.copy(this.form))) {
         this.$store.commit("changeGlobalTipDialogVisible");
         this.$store.commit("setGlobalTip", "信息为空。");
@@ -93,19 +86,19 @@ export default {
         this.$store.commit("setGlobalTip", "未进行修改。");
         return;
       }
-      this.$http.post("http://localhost:8010/example/api/business/update", this.copy(this.form)).then((res) => {
+      this.$http.post("http://localhost:8010/example/api/account/update", this.copy(this.form)).then((res) => {
         if (res.body !== "") {
           let updateList = [];
           updateList.push(this.copy(this.oldInfo))
           updateList.push(this.copy(res.body))
-          this.$store.commit("businessInfoUpdate", updateList);
+          this.$store.commit("accountInfoUpdate", updateList);
           this.$emit("parentMethod");
         }
       })
 
-      this.businessUpdateCancel();
+      this.accountUpdateCancel();
     },
-    businessUpdateCancel() {
+    accountUpdateCancel() {
       for (let item in this.form) this.form[item] = "";
       this.visible = false;
     },
@@ -115,7 +108,4 @@ export default {
 
 <style scoped>
 
-.form-item-width {
-  width: 23vw;
-}
 </style>

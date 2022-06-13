@@ -1,104 +1,124 @@
 <template>
   <div>
     <div>
-      <el-button @click="clearingRuleAdd" type="primary" plain
-                 style="margin:20px 0 15px 40px;padding-top:10px;padding-bottom: 10px">新增规则
-      </el-button>
-      <rule-add @parentMethod="clearingRuleAddSubmit" ref="ruleAdd"></rule-add>
+      <el-row style="display: flex;flex-direction: row">
+        <el-button @click="ruleAdd" class="search-item-button" type="primary" plain>新增</el-button>
+        <rule-add @parentMethod="update" ref="ruleAdd"></rule-add>
+        <el-button @click="ruleChange" class="search-item-button" type="primary" plain style="color: lawngreen">修改
+        </el-button>
+        <rule-update @parentMethod="update" ref="ruleUpdate"></rule-update>
+      </el-row>
     </div>
-
-    <el-table ref="filterTable" :data="clearingRuleList" stripe style="margin-left:40px;width: 85%;font-size: 1.2vw;">
-      <el-table-column prop="businessName" label="商户名称" width="300" :filters=this.$store.state.rule.businessNameList
-                       :filter-method="filterHandler"></el-table-column>
-      <el-table-column prop="transChannel" label="交易渠道" width="200" :filters=this.$store.state.rule.transChannelList
-                       :filter-method="filterHandler"></el-table-column>
-      <el-table-column prop="transType" label="交易类型" width="200" :filters=this.$store.state.rule.transTypeList
-                       :filter-method="filterHandler"></el-table-column>
-      <el-table-column prop="businessPercent" sortable label="收益比例"></el-table-column>
-    </el-table>
+    <div>
+      <rule-info ref="ruleInfo"></rule-info>
+    </div>
   </div>
 
 </template>
 
 <script>
 import ruleAdd from './add'
+import ruleUpdate from './update'
+import ruleInfo from './ruleInfo'
 
 export default {
   name: "index",
   components: {
     ruleAdd,
+    ruleUpdate,
+    ruleInfo,
   },
   data() {
     return {
       clearingRules: [
         {
-          rule_id: "",
-          business_id: "",
-          rule_type: "",
-          content: "",
-          status: "",
-          create_by: "",
-          create_time: "",
-          update_by: "",
-          update_time: "",
+          id: 1,
+          channel: "交易渠道1",
+          type: "交易类型1",
+          from: 1,
+          to: 2,
+          subject: 1,
+          percent: 10,
+          status: 0,
+          create_by: null,
+          create_time: null,
+          update_by: null,
+          update_time: null,
+          remark: null
         }
       ],
-      clearingRuleList: [
-        {
-          transChannel: '微信',
-          transType: '余额',
-          businessPercent: '60%',
-          businessName: '玉龙山景区',
-        },
-        {
-          transChannel: '支付宝',
-          transType: '月卡',
-          businessPercent: '40%',
-          businessName: '滇池风景区',
-        },
-        {
-          transChannel: '网银',
-          transType: '现金',
-          businessPercent: '30%',
-          businessName: '古城驿站区',
-        },
-        {
-          transChannel: '支付宝',
-          transType: '余额',
-          businessPercent: '34%',
-          businessName: '沙溪古镇',
-        },
-        {
-          transChannel: '微信',
-          transType: '余额',
-          businessPercent: '23%',
-          businessName: '滇池风景区',
-        },
-        {
-          transChannel: '微信',
-          transType: '月卡',
-          businessPercent: '31%',
-          businessName: '玉龙山景区',
-        },
-      ]
     }
   },
 
   methods: {
-    clearingRuleAddSubmit(data) {
-      for (let i = 0; i < data.length; i++) this.clearingRuleList.push(data[i]);
+    copy(obj) {
+      let tmp = JSON.stringify(obj);
+      return JSON.parse(tmp);
     },
-    clearingRuleAdd() {
+    ruleAdd() {
       this.$refs.ruleAdd.setVisible(true);
     },
-    filterHandler(value, row, column) {
-      const property = column['property'];
-      return row[property] === value;
-    }
+    ruleChange() {
+      let form = this.$refs.ruleInfo.ruleChange();
+      if (form === "") {
+        this.$store.commit("changeGlobalTipDialogVisible");
+        this.$store.commit("setGlobalTip", "只能修改一条。");
+        return;
+      }
+      this.$refs.ruleUpdate.setRuleInfo(form);
+      this.$refs.ruleUpdate.setVisible(true);
+    },
+    update() {
+      this.$refs.ruleInfo.update();
+    },
+
   }
 }
 </script>
 
-<style scoped>
+<style scoped lang="less">
+.el-row {
+  padding-top: 0.8vw;
+  padding-left: 20px;
+  margin-bottom: 0.5vw;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.grid-content {
+  border-radius: 4px;
+  min-height: 36px;
+}
+
+.bg-purple {
+  background: rgb(245, 245, 245);
+}
+
+.search-item {
+  //border: 1px red solid;
+  width: 26vw;
+  height: 3vw;
+}
+
+.search-item-button {
+  //border: 1px red solid;
+  width: 6.5vw;
+  height: 3vw;
+  margin-right: 2vw;
+}
+
+.search-item-select {
+  margin-left: 13px;
+  width: 18vw;
+  height: 3vw;
+}
+
+.search-item-input {
+  margin-left: 13px;
+  width: 18vw;
+  height: 3vw;
+}
 
 </style>

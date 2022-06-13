@@ -1,25 +1,32 @@
 export default {
     state: {
         transChannelList: [
-            {text: "支付宝", value: "支付宝"},
-            {text: "微信", value: "微信"},
-            {text: "网银", value: "网银"},
+            {text: "交易渠道1", value: "交易渠道1"},
+            {text: "交易渠道2", value: "交易渠道2"},
+            {text: "交易渠道3", value: "交易渠道3"},
         ],
         transTypeList: [
-            {text: "余额", value: "余额"},
-            {text: "月卡", value: "月卡"},
-            {text: "现金", value: "现金"},
+            {text: "交易类型1", value: "交易类型1"},
+            {text: "交易类型2", value: "交易类型2"},
+            {text: "交易类型3", value: "交易类型3"},
         ],
-        businessNameList: [
-            {text: "玉龙山景区", value: "玉龙山景区"},
-            {text: "古城驿站区", value: "古城驿站区"},
-            {text: "沙溪古镇", value: "沙溪古镇"},
-            {text: "滇池风景区", value: "滇池风景区"},
-        ],
+        ruleList: [],
     },
     mutations: {
         collapseMenu(state) {
             state.isCollapse = !state.isCollapse
-        }
+        },
+        ruleListUpdate(state, updateList) {
+            let oldInfo = updateList[0];
+            let newInfo = updateList[1];
+            for (let i = 0; i < state.ruleList.length; i++) {
+                let flag = true;
+                for (let item in oldInfo) if (oldInfo[item] !== state.ruleList[i][item]) flag = false;
+                if (flag) {
+                    for (let item in newInfo) state.ruleList[i][item] = newInfo[item];
+                    break;
+                }
+            }
+        },
     }
 }

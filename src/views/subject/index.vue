@@ -2,18 +2,18 @@
   <div v-on="start">
     <div class="grid-content bg-purple" style="height: 14vw;font-size: 1.2vw;">
       <el-row style="display: flex;flex-direction: row">
-        <div class="search-item">商户名称
+        <div class="search-item">账户编号
           <el-input class="search-item-input" v-model="queryList.name" placeholder="请输入商户名称"></el-input>
         </div>
 
-        <div class="search-item">商户状态
+        <div class="search-item">账户类型
           <el-select class="search-item-select" v-model="queryList.status" placeholder="请选择">
             <el-option v-for="item in statusList" :key="item.status" :label="item.status"
                        :value="item.status"></el-option>
           </el-select>
         </div>
 
-        <div class="search-item">归属区域
+        <div class="search-item">开户银行
           <el-select class="search-item-select" v-model="queryList.region" placeholder="请选择">
             <el-option v-for="item in regionList" :key="item.region" :label="item.region"
                        :value="item.region"></el-option>
@@ -33,30 +33,25 @@
 
       <el-row style="display: flex;flex-direction: row">
         <el-button @click="businessAdd" class="search-item-button" type="primary" plain>新增</el-button>
-        <business-add @parentMethod="update" ref="businessAdd"></business-add>
+        <business-add ref="businessAdd"></business-add>
         <el-button @click="businessChange" class="search-item-button" type="primary" plain style="color: lawngreen">修改
         </el-button>
-        <business-update @parentMethod="update" ref="businessUpdate"></business-update>
+        <business-update ref="businessUpdate"></business-update>
         <el-button @click="businessCancellation" class=" search-item-button" type="primary" plain style="color: red">注销
         </el-button>
       </el-row>
 
-    </div>
-    <div>
-      <sub-business-info ref="subBusinessInfo"></sub-business-info>
     </div>
   </div>
 </template>
 
 <script>
 import BusinessAdd from './add'
-import SubBusinessInfo from "./subBusinessInfo";
 import BusinessUpdate from "./update";
 
 export default {
   name: "index",
   components: {
-    SubBusinessInfo,
     BusinessAdd,
     BusinessUpdate,
   },
@@ -108,9 +103,6 @@ export default {
     },
     businessCancellation() {
       this.$refs.subBusinessInfo.businessCancellation();
-    },
-    update() {
-      this.$refs.subBusinessInfo.update();
     }
   },
   computed: {

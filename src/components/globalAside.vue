@@ -84,6 +84,20 @@ export default {
           url: '/business/index',
         },
         {
+          path: '/account/index',
+          name: 'account',
+          label: '账户管理',
+          icon: 'user-solid',
+          url: '/account/index',
+        },
+        {
+          path: '/subject/index',
+          name: 'subject',
+          label: '科目管理',
+          icon: 'user-solid',
+          url: '/subject/index',
+        },
+        {
           path: '/clearing',
           name: 'clearingRuleManage',
           label: '清分管理',
@@ -112,10 +126,10 @@ export default {
   },
   methods: {
     handleOpen(key, keyPath) {
-      console.log(key, keyPath);
+      // console.log(key, keyPath);
     },
     handleClose(key, keyPath) {
-      console.log(key, keyPath);
+      // console.log(key, keyPath);
     },
     clickMenu(item) {
       this.$router.push({
@@ -126,7 +140,7 @@ export default {
   computed: {
     start() {
       // start
-      // this.clickMenu({name: 'home'});
+      this.clickMenu({name: 'Home'});
     },
     noChildren() {
       return this.menu.filter(item => !item.children)

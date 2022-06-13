@@ -3,6 +3,7 @@ export default {
         isCollapse: false,
         globalTipDialogVisible: false,
         globalTip: "这是提示。",
+        businessId: '',
     },
     mutations: {
         collapseMenu(state) {
@@ -13,6 +14,9 @@ export default {
         },
         setGlobalTip(state, info) {
             state.globalTip = info
+        },
+        asas(state){
+            this.$store.state.tab.businessId
         }
     }
 }

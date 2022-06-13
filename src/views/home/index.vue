@@ -1,19 +1,15 @@
 <template>
-  <div class="12">
-    <el-row class="home" :gutter="20">
-      <el-col :span="3" style="margin: 3vw 0 0 22vw">
+  <div>
+    <el-row class="home" :gutter="10">
+      <el-col :span="2" style="margin: 3vw 0 0 22vw">
 
         <el-card class="box-card">
           <div class="item">Finished：</div>
           <div class="item">feedback</div>
-          <div class="item">business/add</div>
-          <div class="item">Todo:</div>
-          <div class="item">business/delete</div>
-          <div class="item">business/query</div>
-          <div class="item">business/update</div>
-          <div class="item">login</div>
-          <div class="item">clearing/process</div>
+          <div class="item">business</div>
           <div class="item">clearing/rulerManage</div>
+          <div class="item">Todo:</div>
+          <div class="item">clearing/process</div>
         </el-card>
       </el-col>
 
@@ -38,7 +34,7 @@ export default {
 <style scoped>
 
 .item {
-  color: blueviolet;
+  color: #0b25b4;
   display: flex;
   top: 0;
   height: 50px;
@@ -46,7 +42,7 @@ export default {
 }
 
 .box-card {
-  height: 500px;
+  height: 350px;
   width: 40vw;
   padding: 0;
 }

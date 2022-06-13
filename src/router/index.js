@@ -5,7 +5,7 @@ Vue.use(VueRouter)
 
 const routes = [
     {
-        path: '/',
+        path: '/main',
         name: 'Main',
         component: () => import('../views/Main'),
         children: [
@@ -49,6 +49,17 @@ const routes = [
                 component: () => import('../views/business/update'),
             },
 
+            {
+                path: 'account/index',
+                name: 'account',
+                component: () => import ('../views/account/index'),
+            },
+
+            {
+                path: 'subject/index',
+                name: 'subject',
+                component: () => import ('../views/subject/index'),
+            },
             //feedback
             {
                 path: '/feedback',
@@ -61,6 +72,11 @@ const routes = [
         path: '/tmp',
         name: 'tmp',
         component: () => import('../views/tmp'),
+    },
+    {
+        path: '/',
+        name: 'login',
+        component: () => import('../views/login'),
     }
 ]
 

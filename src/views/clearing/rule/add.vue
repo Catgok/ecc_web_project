@@ -5,14 +5,14 @@
           <el-form ref="form" :model="form" label-width="80px">
 
             <el-form-item label="交易渠道">
-              <el-select v-model="form.transChannel" placeholder="请选择">
+              <el-select v-model="form.channel" placeholder="请选择">
                 <el-option v-for="item in this.$store.state.rule.transChannelList" :index="item.text"
                            :key="item.text" :label="item.text" :value="item.value"></el-option>
               </el-select>
             </el-form-item>
 
             <el-form-item label="交易类型">
-              <el-select v-model="form.transType" placeholder="请选择">
+              <el-select v-model="form.type" placeholder="请选择">
                 <el-option v-for="item in this.$store.state.rule.transTypeList" :index="item.text"
                            :key="item.text" :label="item.text" :value="item.value"></el-option>
               </el-select>
@@ -20,21 +20,17 @@
 
             <div style="border: 2px silver solid;padding: 5% 0 0 4%">
               <div>
-                <el-select v-model="form.businessName" placeholder="请选择商户">
-                  <el-option v-for="item in this.$store.state.rule.businessNameList" :index="item.text"
-                             :key="item.text" :label="item.text" :value="item.value"></el-option>
-                </el-select>
-                <el-input v-model="form.businessPercent" placeholder="10%"
-                          style="width:7vw; padding-left: 20px "></el-input>
+                <el-input style="width: 10vw" v-model="form.from" placeholder="出账账户"></el-input>
+                <el-input style="width: 10vw;margin-left: 1vw" v-model="form.to" placeholder="入账账户"></el-input>
+                <el-input v-model="form.percent" placeholder="百分比" style="width:7vw; padding-left: 20px "></el-input>
                 <el-button type="primary" style="width: 5vw;height:40px;margin-left: 20px;border: 0"
-                           @click="clearingRuleAddOne()">添 加</el-button>
+                           @click="clearingRuleAddOne">添 加</el-button>
               </div>
 
               <el-table :data="clearingRuleList" :show-header="false" style="width: 100%;padding-top: 10px">
-                <el-table-column prop="businessName" width="120"></el-table-column>
-                <el-table-column prop="transChannel" width="120"></el-table-column>
-                <el-table-column prop="transType" width="120"></el-table-column>
-                <el-table-column prop="businessPercent"></el-table-column>
+                <el-table-column prop="from" width="200"></el-table-column>
+                <el-table-column prop="to" width="200"></el-table-column>
+                <el-table-column prop="percent"></el-table-column>
               </el-table>
             </div>
 
@@ -56,10 +52,11 @@ export default {
       clearingRuleList: [],
       visible: false,
       form: {
-        transChannel: '',
-        transType: '',
-        businessPercent: '',
-        businessName: '',
+        channel: '',
+        type: '',
+        percent: '',
+        from: '',
+        to: '',
       },
     }
   },
@@ -74,9 +71,15 @@ export default {
     },
     clearingRuleAddSubmit() {
       this.visible = false;
-      console.log('新增rule成功!');
-      console.log(this.clearingRuleList);
-      this.$emit("parentMethod", this.copy(this.clearingRuleList));
+      for (let i = 0; i < this.clearingRuleList.length; i++) {
+        let rule = this.clearingRuleList[i];
+        this.$http.post("http://localhost:8010/example/api/rule/add", this.copy(rule)).then((res) => {
+          if (res.body !== "") this.$store.state.rule.ruleList.push(this.copy(res.body));
+        })
+      }
+      this.$store.commit("changeGlobalTipDialogVisible");
+      this.$store.commit("setGlobalTip", "添加成功");
+      this.$emit("parentMethod");
       this.clearingRuleList = [];
     },
     check(form) {

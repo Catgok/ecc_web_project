@@ -1,20 +1,10 @@
 <template>
   <div>
-    <el-table
-        :data="tableData"
-        :show-header=false
-        style="width: 100%">
-      <el-table-column
-          prop="date"
-          width="180">
-      </el-table-column>
-      <el-table-column
-          prop="name"
-          width="180">
-      </el-table-column>
-      <el-table-column
-          prop="address">
-      </el-table-column>
+    <div v-on="ff()">{{ info }}</div>
+    <el-table :data="tableData" :show-header=false style="width: 100%">
+      <el-table-column prop="date" width="180"></el-table-column>
+      <el-table-column prop="name" width="180"></el-table-column>
+      <el-table-column prop="address"></el-table-column>
     </el-table>
     <!--    <el-button type="primary" icon="el-icon-circle-plus-outline" circle size="large"></el-button>-->
     <!--    <div style="vertical-align: middle ;padding-left: 100px;padding-top: 100px">-->
@@ -60,16 +50,20 @@
   <!--      <canvas id="pieChart"></canvas>-->
   <!--    </div>-->
 
-  </div>
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "tmp",
   data() {
     return {
       input_information: [
-        {input_name: '', input_percent: ''},
+        {
+          input_name: '',
+          input_percent: ''
+        },
       ],
       tableData: [{
         date: '2016-05-02',
@@ -98,11 +92,20 @@ export default {
         'rgba(16, 195, 195,0.5)',
       ],
       epx: 1e-3,
+      info: '',
       pieChart: '',
     }
   },
 
   methods: {
+    //请求跨域问题 https://blog.csdn.net/qq_43647359/article/details/123041889
+    ff() {
+      this.$http.jsonp('http://www.baidu.com').then(
+          (res) => {
+            this.info = res;
+          }
+      )
+    },
     addObj: function () {
       this.input_information.push({});
     },
